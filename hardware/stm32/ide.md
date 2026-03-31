@@ -29,30 +29,30 @@
 <details>
 <summary>编辑器设置</summary>
 
-![](./img/ide.1.png)
+![](./img/mdkarm.1.png)
 
-![](./img/ide.2.png)
+![](./img/mdkarm.2.png)
 
 </details>
 
 <details>
 <summary>字体和颜色设置</summary>
 
-![](./img/ide.3.png)
+![](./img/mdkarm.3.png)
 
 </details>
 
 <details>
 <summary>用户关键字设置</summary>
 
-![](./img/ide.4.png)
+![](./img/mdkarm.4.png)
 
 </details>
 
 <details>
 <summary>代码提示&语法检测</summary>
 
-![](./img/ide.5.png)
+![](./img/mdkarm.5.png)
 
 </details>
 
@@ -72,8 +72,79 @@
 
 2. 快捷方式：选中该函数或变量 + F12
 
-![](./img/ide.6.png)
+![](./img/mdkarm.6.png)
 
 </details>
 
+# STM32CubeMX
+
+## 简介
+
+ST开发的一款图形配置工具，可通过配置自动生成初始化代码。
+
+一个图形配置工具，搭配不同系列的STM32Cube固件包，即可支持不同系列的STM32芯片。
+
+<details>
+<summary>关联STM32Cube固件包的方法</summary>
+
+关联成功后是绿色的
+
+![](./img/cubemx.1.png)
+
+</details>
+
+STM32CubeMX 的用户使用手册：https://www.st.com/en/development-tools/stm32cubemx.html#documentation
+
+## 新建STM32CubeMX工程步骤
+
+<details>
+<summary>1. 工程初步建立：新建工程，选择芯片型号</summary>
+
+</details>
+
+<details>
+<summary>2. 时钟模块配置：设置HSE（外部高速时钟）、LSE（外部低速时钟）、MCO（芯片往外部输出的时钟）</summary>
+
+</details>
+
+<details>
+<summary>3. 时钟系统配置：PLL（锁相环）、SYSCLK（系统时钟）、AHB、APB1、APB2等等</summary>
+
+![](./img/cubemx.2.png)
+
+</details>
+
+<details>
+<summary>4. GPIO引脚配置：以连接在LED灯的IO为例介绍如何配置</summary>
+
+</details>
+
+<details>
+<summary>5. Cortex内核配置：SYS (DEBUG)配置、NVIC（优先级分组，在中断部分讲解）</summary>
+
+</details>
+
+<details>
+<summary>6. 生成工程源码：设置工程，MDK等，最后生成代码工程</summary>
+
+<details>
+<summary>&nbsp;&nbsp;&nbsp;&nbsp;生成工程源码</summary>
+
+选择Advanced
+
+![](./img/cubemx.3.png)
+
+</details>
+
+<details>
+<summary>&nbsp;&nbsp;&nbsp;&nbsp;堆栈大小设置</summary>
+
+![](./img/cubemx.4.png)
+
+</details>
+
+</details>
+
+
+7. 编写用户程序：在 main.c 文件预留的位置编写代码
 

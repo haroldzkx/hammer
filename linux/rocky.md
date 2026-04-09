@@ -119,3 +119,65 @@ sda             disk 476.9G
 ```
 
 </details>
+
+<details>
+<summary>Docker</summary>
+
+```bash
+# 0.check update
+# Refresh the cache to ensure the repository is up-to-date
+sudo dnf makecache
+sudo dnf check-update
+sudo dnf update -y
+
+# 1.clean old version
+sudo dnf remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine
+
+# 2.install dependencies and add docker repo
+# install dnf-plugins-core (to manage repository)
+sudo dnf install -y dnf-plugins-core
+# Add the official Docker CE repository (based on CentOS)
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+# 3.Install the Docker Engine and its common plugins
+sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 4.Start docker service and verify it
+sudo systemctl enable --now docker
+systemctl status docker
+
+# 5.let current user use docker without sudo
+sudo usermod -aG docker $USER
+
+# log out and then log in again to activate the group membership changes.
+su USER_ACCOUNT
+# or use this command
+newgrp docker
+```
+
+Docker Config
+
+在用户主目录下创建目录和文件 `~/.bashrc.d/docker`，写入如下内容，最后 `source ~/.bashrc`
+
+```bash
+DOCKER_REGISTRY="registry.cn-shenzhen.aliyuncs.com/YOUR_NAME"
+
+alias d='docker'
+alias di='docker images'
+alias dil='docker images | sed "s|${DOCKER_REGISTRY}|\$ali|g"'
+alias drm='docker rm'
+alias drmi='docker rmi'
+alias drmf='docker rm -f'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+
+export ali="$DOCKER_REGISTRY"
+
+# 美化格式化输出
+alias dif='docker images --format "\nRepository: {{.Repository}}\nTag: {{.Tag}}\nImage ID: {{.ID}}\nCreated: {{.CreatedAt}}\nSize: {{.Size}}" | sed "s|${DOCKER_REGISTRY}|\$ali|g"'
+
+alias dpsal='docker ps -a --format "\nContainer ID: {{.ID}}\nImage: {{.Image}}\nCommand: {{.Command}}\nCreated: {{.CreatedAt}}\nStatus: {{.Status}}\nPorts: {{.Ports}}\nContainer Name: {{.Names}}\n"'
+alias dpsl='docker ps --format "\nContainer ID: {{.ID}}\nImage: {{.Image}}\nCommand: {{.Command}}\nCreated: {{.CreatedAt}}\nStatus: {{.Status}}\nPorts: {{.Ports}}\nContainer Name: {{.Names}}\n"'
+```
+
+</details>

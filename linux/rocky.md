@@ -181,3 +181,17 @@ alias dpsl='docker ps --format "\nContainer ID: {{.ID}}\nImage: {{.Image}}\nComm
 ```
 
 </details>
+
+<details>
+<summary>远程连接 Windows10 系统</summary>
+
+```bash
+sudo dnf install freerdp
+
+xfreerdp /u:用户名 /p:密码 /v:IP地址 /w:1920 /h:1080
+
+# 推荐用这个，动态调整分辨率
+xfreerdp /u:用户名 /p:密码 /v:IP地址 /dynamic-resolution
+```
+
+</details>

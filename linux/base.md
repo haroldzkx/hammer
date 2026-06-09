@@ -59,31 +59,14 @@ tar -xZvf file.tar.Z
 
 # 磁盘分区与文件目录
 
-| 挂载目录 | 容量大小 | 类型 | 分区类型 | 备注             |
-| -------- | -------- | ---- | -------- | ---------------- |
-| /        | 10G      | ext4 | Primary  |                  |
-| /boot    | 100M     | ext4 | Primary  | 可以与根分区合并 |
-| /usr     | 5G       | ext4 | Logical  | 可以与根分区合并 |
-| /var     | 2G       | ext4 | Logical  | 可以与根分区合并 |
-| /tmp     | 5G       | ext4 | Logical  | 可以与根分区合并 |
-| swap     | 2G       | swap | Logical  |                  |
-| /home    | 尽量大些 | ext4 | Logical  |                  |
+为什么要逻辑卷，什么时候需要逻辑卷？
 
-| 挂载目录 | 容量大小 | 类型 | 分区类型 | 备注             |
-| -------- | -------- | ---- | -------- | ---------------- |
-| /        | 30G      | ext4 | Primary  |                  |
-| /boot    | 512M     | ext4 | Primary  | 可以与根分区合并 |
-| /usr     | 20G      | ext4 | Logical  | 可以与根分区合并 |
-| /var     | 10G      | ext4 | Logical  | 可以与根分区合并 |
-| /tmp     | 5G       | ext4 | Logical  | 可以与根分区合并 |
-| swap     | 2G       | swap | Logical  |                  |
-| /home    | 尽量大些 | ext4 | Logical  |                  |
+可以把LVM理解成一个"软件层"，它位于物理磁盘和文件系统之间，好处是可以随时动态扩容
 
-| 挂载目录 | 容量大小 | 类型 | 分区类型 | 备注 |
-| -------- | -------- | ---- | -------- | ---- |
-| /        | 65G      | ext4 | Primary  |      |
-| swap     | 2G       | swap | Logical  |      |
-| /home    | 尽量大些 | ext4 | Logical  |      |
+```bash
+物理磁盘 → 物理卷(PV) → 卷组(VG) → 逻辑卷(LV) → 文件系统 → 挂载点
+/dev/sda   /dev/sda1    ubuntu-vg    root-lv     ext4       /
+```
 
 - `/`： Linux 系统的根目录，所有的目录都挂在这个目录下面
 - `/boot`：用来存放与 Linux 系统启动有关的程序，比如启动引导装载程序等

@@ -1,57 +1,27 @@
 # matplotlib 中文乱码问题解决
 
-查看 matplotlib 系统自带的字体
+可以从这三个路径下载中文字体文件 SimHei.ttf 放到项目目录中
 
-```python
-# 查询当前系统所有字体
-from matplotlib.font_manager import FontManager
-import subprocess
+```bash
+wget -O SimHei.ttf "https://www.wfonts.com/download/data/2014/06/01/simhei/chinese.simhei.ttf"
+# 或
+wget -O SimHei.ttf "https://github.com/StellarCN/scp_zh/blob/master/fonts/SimHei.ttf"
 
-mpl_fonts = set(f.name for f in FontManager().ttflist)
-
-print('all font list get from matplotlib.font_manager:')
-for f in sorted(mpl_fonts):
-    print('\t' + f)
+wget -O SimHei.ttf "https://gitee.com/haroldzkx/repo/releases/download/matplotlib.font/SimHei.ttf"
 ```
 
-运行结果如下：
-
-```text
-all font list get from matplotlib.font_manager:
-	DejaVu Sans
-	DejaVu Sans Display
-	DejaVu Sans Mono
-	DejaVu Serif
-	DejaVu Serif Display
-	STIXGeneral
-	STIXNonUnicode
-	STIXSizeFiveSym
-	STIXSizeFourSym
-	STIXSizeOneSym
-	STIXSizeThreeSym
-	STIXSizeTwoSym
-	WenQuanYi Micro Hei
-	WenQuanYi Zen Hei
-	cmb10
-	cmex10
-	cmmi10
-	cmr10
-	cmss10
-	cmsy10
-	cmtt10
-```
-
-从结果里找一个中文字体，然后添加如下代码就可以解决。
-
-> 注意：每个系统里内置的字体不一样，要自己挑一下字体，然后再用下面的代码
+在绘图代码前添加如下代码就可使用中文字体
 
 ```python
-# 设置支持中文字体
 import matplotlib
-matplotlib.rc('font', family='WenQuanYi Micro Hei')
-
+​
+# 添加下载的字体文件
+matplotlib.font_manager.fontManager.addfont('./SimHei.ttf')
+​
+# 设置 Matplotlib 使用 SimHei 字体
+matplotlib.rc('font', family='SimHei')
 # 或者添加如下代码
-plt.rc('font', family='WenQuanYi Micro Hei')
+plt.rc('font', family='SimHei')
 ```
 
 # 饼图

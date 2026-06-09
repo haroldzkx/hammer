@@ -1,25 +1,19 @@
-# 远程连接
+版本选择
 
-## SSH
+个人物理机：Ubuntu Desktop (ubuntu-24.04.4-desktop-amd64.iso)
 
-```bash
-ssh username@IP
-ssh username@域名 -p port
-```
+VMware虚拟机：(ubuntu-24.04.4-live-server-amd64.iso)
 
-## mosh
+- 只运行特定服务：Ubuntu Server (Minimal)
 
-使用 SSH 连接后输入命令卡顿，延迟高，可以考虑使用 mosh
+- 通用服务器使用：Ubuntu Server
+
+WSL2: (ubuntu-24.04.4-wsl-amd64.wsl)
 
 # 查看系统信息
 
-## 查看内存使用情况
-
-```bash
-free -h
-```
-
-## 查看内存硬件信息
+<details>
+<summary>查看内存硬件信息</summary>
 
 ```bash
 sudo apt install dmidecode
@@ -34,7 +28,10 @@ sudo dmidecode | grep -P 'Maximum\s+Capacity'
 sudo dmidecode | grep -A16 "Memory Device" | grep 'Speed'
 ```
 
-## 查看电池电量
+</details>
+
+<details>
+<summary>查看电池电量</summary>
 
 ```bash
 # 安装工具
@@ -52,9 +49,12 @@ upower -i /org/freedesktop/UPower/devices/battery_BAT0
 upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|percentage"
 ```
 
+</details>
+
 # 修改系统配置
 
-## 修改软件源
+<details>
+<summary>修改软件源</summary>
 
 ```bash
 # 备份当前的源列表
@@ -101,14 +101,20 @@ sudo apt update
 sudo apt upgrade
 ```
 
-## 修改用户密码
+</details>
+
+<details>
+<summary>修改用户密码</summary>
 
 ```bash
 # 修改 root 用户密码（初始密码）
 sudo passwd root
 ```
 
-## 修改终端字体大小
+</details>
+
+<details>
+<summary>修改终端字体大小</summary>
 
 ```bash
 # 1.打开配置文件
@@ -124,11 +130,17 @@ FONTSIZE="16x32"
 sudo setupcon
 ```
 
-## 修改登录后的欢迎信息
+</details>
+
+<details>
+<summary>修改登录后的欢迎信息</summary>
 
 修改 `/etc/update-motd.d/`目录下的脚本内容来更改登录后的欢迎信息
 
-## 修改终端显示方向
+</details>
+
+<details>
+<summary>修改终端显示方向</summary>
 
 ```bash
 # 1.打开配置文件
@@ -146,7 +158,11 @@ update-grub
 reboot
 ```
 
-## 自定义 Bash 提示符的颜色
+</details>
+
+
+<details>
+<summary>自定义 Bash 提示符的颜色</summary>
 
 ```shell
 # 打开配置文件
@@ -163,7 +179,10 @@ export PS1="\[\033[0;32m\]\u@\h\[\033[00m\]:\[\033[0;34m\]\w\[\033[00m\]\\$ "
 source ~/.bashrc
 ```
 
-## 修改时间和时区
+</details>
+
+<details>
+<summary>修改时间和时区</summary>
 
 ```bash
 # 查看当前系统的时区设置
@@ -173,7 +192,10 @@ timedatectl
 sudo timedatectl set-timezone "Asia/Shanghai"
 ```
 
-## 蓝牙配置
+</details>
+
+<details>
+<summary>蓝牙配置</summary>
 
 ```bash
 sudo apt update
@@ -196,7 +218,10 @@ bluetoothctl
 systemctl status bluetooth
 ```
 
-## 修改开机搜寻网络时间
+</details>
+
+<details>
+<summary>修改开机搜寻网络时间</summary>
 
 开机时出现这样的界面，
 
@@ -216,9 +241,12 @@ TimeoutStartSec=2sec
 
 保存退出后，开机重启
 
+</details>
+
 # 软件安装
 
-## Docker
+<details>
+<summary>Docker</summary>
 
 ```bash
 # 1.检查卸载老版本 docker
@@ -243,7 +271,7 @@ rm docker-ce.gpg
 sudo add-apt-repository "deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 
 # 6.安装docker
-apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # 7.配置用户组然后重启系统
 sudo usermod -aG docker $USER
@@ -255,7 +283,10 @@ service docker restart
 docker run hello-world
 ```
 
-## quickq VPN
+</details>
+
+<details>
+<summary>quickq VPN</summary>
 
 ```bash
 # 先准备一个空目录
@@ -341,26 +372,19 @@ Press "Ctrl+D" to exit
 2022/07/11 18:23:41 tcp:127.0.0.1:39924 accepted tcp:www.baidu.com:443 [agentout]
 ```
 
-## w3m【浏览器】
+</details>
 
-```bash
-sudo apt install w3m
-```
-
-## git
-
-```bash
-sudo apt install git
-git --version
-```
-
-## ping
+<details>
+<summary>ping</summary>
 
 ```bash
 sudo apt install iputils-ping
 ```
 
-## gcc 与 g++编译器
+</details>
+
+<details>
+<summary>gcc 与 g++编译器</summary>
 
 `build-essential`软件包是一个元软件包，它会安装一系列基本的开发工具，包括 `gcc`编译器、`g++`编译器等。
 
@@ -369,16 +393,10 @@ sudo apt update
 sudo apt install build-essential
 ```
 
-## python 的 pip 工具
+</details>
 
-```bash
-sudo apt update
-sudo apt install python3-venv
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-sudo python3 get-pip.py
-```
-
-## Open vSwitch
+<details>
+<summary>Open vSwitch</summary>
 
 ```bash
 sudo apt update
@@ -388,32 +406,175 @@ sudo systemctl enable openvswitch-switch # 设置开机自启动
 sudo systemctl status openvswitch-switch
 ```
 
-## micromamba
+</details>
+
+<details>
+<summary>FreeRDP远程连接Windows10</summary>
 
 ```bash
-# Automatic Install
-"${SHELL}" <(curl -L micro.mamba.pm/install.sh)
+sudo apt update
+sudo apt install freerdp2-x11
 
-# Once installed, micromamba can be updated with
-micromamba self-update
+# 验证是否安装成功
+xfreerdp /version
+
+xfreerdp /u:用户名 /p:密码 /v:IP地址 /w:1920 /h:1080
+
+# 推荐用这个，动态调整分辨率
+xfreerdp /u:用户名 /p:密码 /v:IP地址 /dynamic-resolution
+
+# scale 进行缩放显示，Windows只有100，140，180三个值
+xfreerdp /u:用户名 /p:密码 /v:IP地址 /dynamic-resolution /scale:180
+```
+
+</details>
+
+<details>
+<summary>Rust</summary>
+
+```bash
+# 安装基础工具
+sudo apt update
+sudo apt install build-essential -y
+
+# 下载并运行官方安装脚本
+# 使用 rustup 镜像 清华源
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# 配置环境变量
+source $HOME/.cargo/env
+
+# 验证安装
+rustc --version
+cargo --version
+rustup --version
+```
+
+</details>
+
+<details>
+<summary>uv</summary>
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+</details>
+
+<details>
+<summary>Google Chrome</summary>
+
+```bash
+# 1: Update Your System
+sudo apt update
+sudo apt upgrade
+
+# 2: Setup GPG Keys
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmour -o /usr/share/keyrings/chrome.gpg
+
+# 3: Adding Chrome PPA to System
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/chrome.gpg]  \
+http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list'
+
+# 4: Installing Google Chrome
+sudo apt update
+sudo apt install google-chrome-stable
+
+# 5: Launch Chrome Application
+google-chrome
+```
+
+</details>
+
+<details>
+<summary>vim</summary>
+
+```shell
+set showmatch         " Highlight parentheses
+
+set number            " set line number
+
+set cindent           " C-style indent
+
+set autoindent
+
+set tabstop=4         " set tab width
+set softtabstop=4
+set shiftwidth=4      " The uniform indentation is 4
+
+syntax on
+```
+
+</details>
+
+<details>
+<summary>tmux</summary>
+
+```powershell
+# set scroll screen like vim
+setw -g mode-keys vi
+
+# session index from 1
+set -g base-index 1
+
+# pane index from 1, not 0
+set -g pane-base-index 1
+
+# vim style to move cursor in pane
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
 ```
 
 ```bash
-micromamba config append channels conda-forge
-micromamba config append channels nodefaults
-micromamba config set channel_priority strict
+tmux source-file ~/.tmux.conf
 ```
 
+</details>
+
+<details>
+<summary>fcitx5</summary>
+
 ```bash
-# 在 .bashrc中添加如下内容后执行命令：source ~/.bashrc
-alias mma="micromamba activate"
-alias mmda="micromamba deactivate"
-alias mm="micromamba"
-alias mmc="micromamba create -n"
-alias mms="micromamba search"
-alias mmi="micromamba install"
-alias mmu="micromamba update"
-alias mmr="micromamba remove"
-alias mml="micromamba list"
-alias mmel="micromamba env list"
+# Uninstall old input method
+sudo apt purge fcitx* ibus*
+
+# Install
+sudo apt install fcitx5 fcitx5-chinese-addons fcitx5-pinyin
+
+sudo reboot
 ```
+
+</details>
+
+# shell
+
+<details>
+<summary>ubuntu.base.sh</summary>
+
+```bash
+
+```
+
+</details>
+
+<details>
+<summary>ubuntu.rust.sh</summary>
+
+```bash
+
+```
+
+</details>
+
+<details>
+<summary>ubuntu.python.sh</summary>
+
+```bash
+
+```
+
+</details>

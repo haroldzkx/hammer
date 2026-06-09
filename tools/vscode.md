@@ -163,6 +163,41 @@
 
 </details>
 
+<details>
+<summary>VSCode 控制台中文乱码</summary>
+
+在项目根目录下创建.vscode/setttings.json 文件
+
+```json
+{
+    // 全局文件编码
+    "files.encoding": "utf8",
+    "files.autoGuessEncoding": true,
+    // 终端编码
+    "terminal.integrated.fontFamily": "Consolas, 'Microsoft YaHei'", // 支持中文显示的字体
+    // 强制终端使用UTF-8（关键）
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "args": ["-NoExit", "/c", "chcp 65001"] // 启动时自动切换编码为UTF-8
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": ["/k", "chcp 65001"], // CMD启动时切换UTF-8
+            "icon": "terminal-cmd"
+        }
+    },
+    // 默认终端选PowerShell（可选，也可以选CMD）
+    "terminal.integrated.defaultProfile.windows": "PowerShell"
+}
+```
+
+</details>
+
+
 ---
 
 # 连接 Docker 开发

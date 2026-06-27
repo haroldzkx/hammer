@@ -110,6 +110,40 @@ sudo apt upgrade
 </details>
 
 <details>
+<summary>.bash_aliases</summary>
+
+```bash
+# python
+export pybfsu=https://mirrors.bfsu.edu.cn/pypi/web/simple
+export pyustc=https://mirrors.ustc.edu.cn/pypi/simple
+
+# system
+
+# list directory
+alias llh='ls -lh'
+alias list='ls -lha'
+
+# docker
+alias d='docker'
+alias di='docker images'
+alias dil='docker images | sed "s|registry.cn-shenzhen.aliyuncs.com/haroldfinch|\$ali|g"'
+alias drm='docker rm'
+alias drmi='docker rmi'
+alias drmf='docker rm -f'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+
+export ali=registry.cn-shenzhen.aliyuncs.com/haroldfinch
+
+alias dif='docker images --format "\nRepository: {{.Repository}}\nTag: {{.Tag}}\nImage ID: {{.ID}}\nCreated: {{.CreatedAt}}\nSize: {{.Size}}" | sed "s|registry.cn-shenzhen.aliyuncs.com/haroldfinch|\$ali|g"'
+
+alias dpsal='docker ps -a --format "\nContainer ID: {{.ID}}\nImage: {{.Image}}\nCommand: {{.Command}}\nCreated: {{.CreatedAt}}\nStatus: {{.Status}}\nPorts: {{.Ports}}\nContainer Name: {{.Names}}\n"'
+alias dpsl='docker ps --format "\nContainer ID: {{.ID}}\nImage: {{.Image}}\nCommand: {{.Command}}\nCreated: {{.CreatedAt}}\nStatus: {{.Status}}\nPorts: {{.Ports}}\nContainer Name: {{.Names}}\n"'
+```
+
+</details>
+
+<details>
 <summary>修改用户密码</summary>
 
 ```bash

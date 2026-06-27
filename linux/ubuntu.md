@@ -57,6 +57,12 @@ upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|percenta
 <summary>修改软件源</summary>
 
 ```bash
+# ubuntu 24.04.4 LTS 清华源
+sudo echo -e "Types: deb\nURIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu\nSuites: noble noble-updates noble-backports\nComponents: main restricted universe multiverse\nSigned-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg" | sudo tee /etc/apt/sources.list.d/tsinghua.sources > /dev/null
+```
+
+```bash
+# ubuntu 22.04 LTS
 # 备份当前的源列表
 sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
 
